@@ -9,5 +9,6 @@ id {letter}+
 %%
 {num} {yylval=atoi(yytext);return(NUM);}
 "+" {return(ADD);}
+"-" {return(SUB);}
 
 %%
