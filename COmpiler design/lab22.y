@@ -3,12 +3,15 @@
 void yyerror(char *s);
 int yylex();
 %}
-%token NUM ADD
+%token NUM ADD SUB
 %start lab
-%left ADD
+%left ADD SUB
 %%
 
-lab: NUM ADD NUM {$$=$1+$2,printf("%d + %d = %d\n",$1,$2,$$);};
+lab: exp {$$=$1,printf(" = %d\n",$$);};
+exp:exp ADD exp {$$=$1+$3;}
+	| exp SUB exp {$$=$1-$3;}
+	| NUM {$$=$1;};
 %%
 int main()
 {
